@@ -56,3 +56,15 @@ Verified 17 September 2026:
 Experience API: https://showtell-shopping-experience-api-9uhlaf.5sc6y6-1.usa-e2.cloudhub.io
 
 Initial failures in region discovery permissions and the Exchange validation repository were corrected before this successful run. The run has non-blocking GitHub action deprecation notices; package, deployment and smoke checks completed successfully.
+
+## CloudHub log visibility correction
+
+Run [35252788152](https://github.com/pkiragu/mulesoft-troubleshooting-demo/actions/runs/35252788152) successfully deployed version `1.0.401` from commit `c507962`, using CloudHub-managed logging instead of the local console/file configuration. Verified in Chrome's Runtime Manager log viewer:
+
+- Inventory: `stock.requested` and `stock.returned` for `cloud-log-check-inventory-20260917`, including Bristol's string quantity.
+- Experience: `checkout.received` and `checkout.completed` (201) for `cloud-log-verify-london-20260917`.
+- Experience: `checkout.received`, the HTTP failure stack and `request.failed` (502) for `cloud-log-verify-bristol-20260917`.
+
+Fresh cloud traffic after correction again returned 92 successes and 8 failures from 100 requests. Local response evidence: `.run/cloud-logged-requests.jsonl`; named probes: `.run/cloud-log-probes.json`. Earlier uncollected API logs are not recovered by this correction.
+
+[Experience logs in Runtime Manager](https://anypoint.mulesoft.com/cloudhub/#/console/applications/runtimeFabric/1581c81c-9125-4900-9ac8-c440fc2344e6/log): search `cloud-log-verify` to see the named examples, or clear Search for the full traffic sample. Keep all log levels selected when reviewing stack traces.

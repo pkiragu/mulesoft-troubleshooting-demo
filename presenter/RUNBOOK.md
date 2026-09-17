@@ -83,3 +83,11 @@ python3 scripts/traffic.py --base-url https://YOUR-EXPERIENCE-HOST --phase incid
 ```
 
 For a short presentation, run the already-prepared local diagnosis first and show the successful GitHub deployment run separately; a fresh full cloud deployment can take several minutes.
+
+### Viewing CloudHub logs
+
+In Runtime Manager, select **Sandbox → Applications → showtell-shopping-experience-api → Logs**. Select the latest successful configuration, keep INFO and ERROR enabled, and clear the search/time filters when checking overall activity. Search a response's `correlationId` to follow one request; use that same ID in the inventory and process API logs.
+
+Cloud releases from `1.0.401` omit the developer-only `log4j2.xml` and use CloudHub's managed logging. Earlier cloud API releases executed requests but did not expose their application events in Runtime Manager. Those missing logs are not reconstructed by redeployment; generate new traffic after the logging correction.
+
+Verified log examples after the correction: search `cloud-log-verify` in Experience API Logs to see London's 201 and Bristol's 502. Fresh 100-request cloud evidence is in `.run/cloud-logged-requests.jsonl` (92 successes, 8 failures). The verified logging deployment is https://github.com/pkiragu/mulesoft-troubleshooting-demo/actions/runs/35252788152.
