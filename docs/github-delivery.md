@@ -9,7 +9,7 @@ Target: Show and Tell Demo / Sandbox / CloudHub 2.0 US East (Ohio). The trial sh
 - **Mule - package** runs on main pushes, pull requests and manual dispatch. It packages the four API apps on Java 17 and saves JARs, source commit and checksums for one day.
 - **Mule - deploy CloudHub trial** is manually dispatched on main. Select `incident` for the broken demo or `fixed` after the repair. It checks mock backend contracts, packages all five apps, then publishes and deploys backend → inventory system → order system → order process → shopping experience. It discovers the actual CloudHub URLs and uses HTTPS for downstream calls. Health checks and London/Bristol checkout status checks must pass.
 
-Deployment uses unique Exchange versions derived from run number and attempt. Each app is packaged and published to Exchange, then the same package is passed to the Mule deployment goal. Deployed JARs and URLs are saved in the run artifact; the successful run summary links the services. Concurrent deployments are serialized. Deployment can partially complete: inspect failed runs before retrying. A full redeployment resets the cloud mock's data.
+Deployment uses unique Exchange versions derived from run number and attempt. Each app is packaged and published to Exchange, then CloudHub deploys that published group, artifact and version from Exchange. Deployed JARs and URLs are saved in the run artifact; the successful run summary links the services. Concurrent deployments are serialized. Deployment can partially complete: inspect failed runs before retrying. A full redeployment resets the cloud mock's data.
 
 ## Tests and trial limitation
 
@@ -23,7 +23,7 @@ GitHub runs standalone backend contract checks and live CloudHub smoke checks. A
 
 ## Credentials
 
-The approved `github-demo-deployer` Connected App has Design Center Developer and Exchange Creator in Show and Tell Demo, and Create Applications, Manage Settings and Read Applications restricted to Sandbox. `ANYPOINT_CLIENT_ID` and `ANYPOINT_CLIENT_SECRET` are saved as GitHub repository Actions secrets. No credential value is committed. The deployment script writes only environment-variable references to Maven settings. GitHub CLI was authorized as pkiragu through Chrome for source publishing.
+The approved `github-demo-deployer` Connected App has Design Center Developer, Exchange Creator, Exchange Contributor, Exchange Viewer, Cloudhub Network Viewer and Read Runtime Fabrics in Show and Tell Demo, and Create Applications, Manage Settings and Read Applications restricted to Sandbox. `ANYPOINT_CLIENT_ID` and `ANYPOINT_CLIENT_SECRET` are saved as GitHub repository Actions secrets. No credential value is committed. The deployment script writes only environment-variable references to Maven settings. GitHub CLI was authorized as pkiragu through Chrome for source publishing.
 
 ## Cloud mock backend
 
@@ -43,4 +43,16 @@ Sources:
 
 ## Verification status
 
-Local MUnit verification and backend contract checks passed. Real Mule HTTP backend checks passed for data types, reservations, order retrieval, idempotency and stock rejection. Hosted package run 35249156773 passed. Initial CloudHub run 35249164386 authenticated successfully but failed on a region discovery HTTP 403 before creating an application; the required CloudHub/Exchange scope update is prepared pending confirmation. Live deployment is not yet verified.
+Verified 17 September 2026:
+
+- Local MUnit verification and mock backend contract checks passed.
+- Hosted package run [35249156773](https://github.com/pkiragu/mulesoft-troubleshooting-demo/actions/runs/35249156773) passed.
+- CloudHub deployment run [35250339907](https://github.com/pkiragu/mulesoft-troubleshooting-demo/actions/runs/35250339907) passed in 17m 32s, deploying all five apps at Exchange version `1.0.301` from commit `0b1b447`.
+- All five public health checks passed. London checkout returned 201; Bristol returned the intended 502.
+- A further 100 live cloud checkout requests produced exactly 92 successes and 8 intended failures. Responses and correlation IDs are saved locally in `.run/cloud-requests.jsonl`.
+- Direct inventory calls returned HTTP 200 for both stores, with a numeric London quantity and string Bristol quantity: the intended incident is present in CloudHub.
+- Deployment packages were downloaded to ignored `delivery/verified-cloud/` and their SHA-256 checksums verified.
+
+Experience API: https://showtell-shopping-experience-api-9uhlaf.5sc6y6-1.usa-e2.cloudhub.io
+
+Initial failures in region discovery permissions and the Exchange validation repository were corrected before this successful run. The run has non-blocking GitHub action deprecation notices; package, deployment and smoke checks completed successfully.

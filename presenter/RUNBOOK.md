@@ -74,7 +74,7 @@ This is genuine Mule execution with synthetic business data, not production tele
 
 ## Cloud delivery extension
 
-The private GitHub repository is https://github.com/pkiragu/mulesoft-troubleshooting-demo. The manual **Mule - deploy CloudHub trial** workflow deploys the full stack. Choose `incident` before the repair and `fixed` after pushing the repair. Deployment resets the in-memory cloud mock; allow time for five workers to start. Its hosted checks include backend contracts and live checkout outcomes; MUnit runs locally because Enterprise test dependencies are unavailable from the public repository.
+The private GitHub repository is https://github.com/pkiragu/mulesoft-troubleshooting-demo. [Verified deployment run](https://github.com/pkiragu/mulesoft-troubleshooting-demo/actions/runs/35250339907) deployed all five apps in 17m 32s. A subsequent 100-request cloud sample produced 92 successes and 8 failures (`.run/cloud-requests.jsonl`). The manual **Mule - deploy CloudHub trial** workflow deploys the full stack. Choose `incident` before the repair and `fixed` after pushing the repair. Deployment resets the in-memory cloud mock; allow time for five workers to start. Its hosted checks include backend contracts and live checkout outcomes; MUnit runs locally because Enterprise test dependencies are unavailable from the public repository.
 
 Use the Experience URL from the successful workflow summary to generate cloud activity without overwriting the original evidence:
 
