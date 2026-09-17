@@ -4,5 +4,5 @@ output application/json
 {
     sku: payload.sku,
     storeId: payload.storeId,
-    availableQuantity: payload.availableQuantity as Number
+    availableQuantity: payload.availableQuantity
 }
