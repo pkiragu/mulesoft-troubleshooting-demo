@@ -1,0 +1,431 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] click-collect-demo                                                 [pom]
+[INFO] inventory-system-api                                  [mule-application]
+[INFO] 
+[INFO] ------------------< com.showtell:click-collect-demo >-------------------
+[INFO] Building click-collect-demo 1.0.0                                  [1/2]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] -----------------< com.showtell:inventory-system-api >------------------
+[INFO] Building inventory-system-api 1.0.0                                [2/2]
+[INFO]   from apps/inventory-system-api/pom.xml
+[INFO] --------------------------[ mule-application ]--------------------------
+[INFO] 
+[INFO] --- mule:4.3.0:validate (default-validate) @ inventory-system-api ---
+[INFO] 
+[INFO] --- mule:4.3.0:initialize (default-initialize) @ inventory-system-api ---
+[INFO] 
+[INFO] --- mule:4.3.0:generate-sources (default-generate-sources) @ inventory-system-api ---
+[INFO] 
+[INFO] --- mule:4.3.0:process-sources (default-process-sources) @ inventory-system-api ---
+[INFO] About to fetch required dependencies for artifact: com.showtell:inventory-system-api:pom:1.0.0. This may take a while...
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ inventory-system-api ---
+[INFO] Copying 3 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- mule:4.3.0:process-resources (default-process-resources) @ inventory-system-api ---
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ inventory-system-api ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- mule:4.3.0:compile (default-compile) @ inventory-system-api ---
+[INFO] 
+[INFO] --- mule:4.3.0:process-classes (default-process-classes) @ inventory-system-api ---
+[INFO] About to fetch required dependencies for artifact: 864fcc30-b2b4-11f1-b792-964ecf2b09d9:864fcc30-b2b4-11f1-b792-964ecf2b09d9:pom:4.7.2. This may take a while...
+[INFO] About to fetch required dependencies for artifact: 86c1c7e0-b2b4-11f1-b792-964ecf2b09d9:86c1c7e0-b2b4-11f1-b792-964ecf2b09d9:pom:4.7.2. This may take a while...
+[WARNING] Internal plugin library 'org.mule.runtime:mule-api' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-metadata-model-api' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-message-metadata-model' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-artifact-declaration' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-artifact-declaration-persistence' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:api-annotations' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-embedded-api' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-embedded-commons' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[INFO] About to fetch required dependencies for artifact: 86f24dc0-b2b4-11f1-b792-964ecf2b09d9:86f24dc0-b2b4-11f1-b792-964ecf2b09d9:pom:4.7.2. This may take a while...
+[WARNING] Internal plugin library 'org.mule.runtime:mule-api' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-metadata-model-api' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-message-metadata-model' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-artifact-declaration' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-artifact-declaration-persistence' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:api-annotations' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-embedded-api' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-embedded-commons' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-api' is a Mule Runtime dependency. It will not be used by 'munit-tools-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-metadata-model-api' is a Mule Runtime dependency. It will not be used by 'munit-tools-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-message-metadata-model' is a Mule Runtime dependency. It will not be used by 'munit-tools-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-artifact-declaration' is a Mule Runtime dependency. It will not be used by 'munit-tools-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-artifact-declaration-persistence' is a Mule Runtime dependency. It will not be used by 'munit-tools-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:api-annotations' is a Mule Runtime dependency. It will not be used by 'munit-tools-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[INFO] About to fetch required dependencies for artifact: 873c00f0-b2b4-11f1-b792-964ecf2b09d9:873c00f0-b2b4-11f1-b792-964ecf2b09d9:pom:4.7.2. This may take a while...
+[INFO] About to fetch required dependencies for artifact: 87624da0-b2b4-11f1-b792-964ecf2b09d9:87624da0-b2b4-11f1-b792-964ecf2b09d9:pom:4.7.2. This may take a while...
+[INFO] About to fetch required dependencies for artifact: 8774c430-b2b4-11f1-b792-964ecf2b09d9:8774c430-b2b4-11f1-b792-964ecf2b09d9:pom:4.7.2. This may take a while...
+[WARNING] Internal plugin library 'org.mule.runtime:mule-api' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-metadata-model-api' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-message-metadata-model' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-artifact-declaration' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-artifact-declaration-persistence' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:api-annotations' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-embedded-api' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-embedded-commons' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[INFO] About to fetch required dependencies for artifact: 879d81e0-b2b4-11f1-b792-964ecf2b09d9:879d81e0-b2b4-11f1-b792-964ecf2b09d9:pom:4.7.2. This may take a while...
+[WARNING] Internal plugin library 'org.mule.runtime:mule-api' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-metadata-model-api' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-message-metadata-model' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-artifact-declaration' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-artifact-declaration-persistence' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:api-annotations' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-embedded-api' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-embedded-commons' is a Mule Runtime dependency. It will not be used by 'munit-runner-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-api' is a Mule Runtime dependency. It will not be used by 'munit-tools-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-metadata-model-api' is a Mule Runtime dependency. It will not be used by 'munit-tools-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-message-metadata-model' is a Mule Runtime dependency. It will not be used by 'munit-tools-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-artifact-declaration' is a Mule Runtime dependency. It will not be used by 'munit-tools-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:mule-artifact-declaration-persistence' is a Mule Runtime dependency. It will not be used by 'munit-tools-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[WARNING] Internal plugin library 'org.mule.runtime:api-annotations' is a Mule Runtime dependency. It will not be used by 'munit-tools-3.4.0-mule-plugin.jar' in order to avoid classloading issues. Please consider removing it, or at least not putting it with 'compile' scope.
+[INFO] 
+[INFO] --- mule:4.3.0:generate-test-sources (default-generate-test-sources) @ inventory-system-api ---
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ inventory-system-api ---
+[INFO] skip non existing resourceDirectory /Users/peterg./Documents/ChatGPT/Show & Tell Codex/apps/inventory-system-api/src/test/resources
+[INFO] 
+[INFO] --- mule:4.3.0:generate-test-resources (default-generate-test-resources) @ inventory-system-api ---
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ inventory-system-api ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- mule:4.3.0:test-compile (default-test-compile) @ inventory-system-api ---
+[INFO] 
+[INFO] --- surefire:3.1.2:test (default-test) @ inventory-system-api ---
+[INFO] 
+[INFO] --- munit:3.4.0:test (test) @ inventory-system-api ---
+[INFO] Acquiring dynamic ports...
+[INFO] Dynamic port definition [DONE]
+[INFO] About to fetch required dependencies for artifact: com.showtell:inventory-system-api:pom:1.0.0. This may take a while...
+[INFO] Copying files to /Users/peterg./Documents/ChatGPT/Show & Tell Codex/apps/inventory-system-api/target/munitworkingdir-31531590803958/inventory-system-api
+[INFO] Running MULE_EE with version 4.9.0
+[INFO] --add-opens: java.base/java.lang.invoke=org.mule.runtime.embedded.api
+[INFO] --add-opens: java.base/java.lang.reflect=org.mule.runtime.embedded.api
+[INFO] --add-opens: java.base/java.lang=org.mule.runtime.embedded.api
+[INFO] --add-opens: java.sql/java.sql=org.mule.runtime.embedded.api
+2026-09-17T17:26:28,997 INFO  [main] org.mule.munit.remote.RemoteRunner - Run Started
+
+
+2026-09-17T17:26:29,005 INFO  [main] org.mule.munit.remote.RemoteRunner - Mule container is starting, it could take a few minutes
+2026-09-17T17:26:32,457 INFO  [Embedded] org.mule.runtime.core.internal.logging - 
+**********************************************************************
+*                                                                    *
+*                         (((((((((((((((((((                        *
+*                     (((((                 ((((#                    *
+*                  &(((                        *(((                  *
+*                &(((                             (((                *
+*               (((     (((%               (((#     (((              *
+*              ((     (((((((             (((((((    (((             *
+*             ((     (((((((((           (((((((((     ((            *
+*            ((    #(((((((((((        #(((((((((((    (((           *
+*           #((    ((((((((((((((     ((((((((((((((    ((           *
+*           ((    ((((((  /(((((((   (((((((  /((((((    ((          *
+*           ((    ((((((    (((((((&(((((((    ((((((    ((          *
+*           ((    (((((      ((((((((((((*     ((((((    ((          *
+*           ((    ((((((      *(((((((((       ((((((    ((          *
+*           ((    ((((((        (((((((        ((((((   (((          *
+*            ((    ((((((                     ((((((    ((           *
+*            ((#    ((((((#                 (((((((    ((            *
+*             ((#    ((((((((             ((((((((    (((            *
+*              (((    (((((((              (((((     ((.             *
+*                ((      (((               (((     #((               *
+*                 /((                            (((                 *
+*                    (((                      &(((                   *
+*                      *((((&             &((((                      *
+*                           ((((((((((((((/                          *
+*                                                                    *
+*    ___  ___      _        ______            _   _                  *
+*    |  \/  |     | |       | ___ \          | | (_)                 *
+*    | .  . |_   _| | ___   | |_/ /   _ _ __ | |_ _ _ __ ___   ___   *
+*    | |\/| | | | | |/ _ \  |    / | | | '_ \| __| | '_ ` _ \ / _ \  *
+*    | |  | | |_| | |  __/  | |\ \ |_| | | | | |_| | | | | | |  __/  *
+*    \_|  |_/\__,_|_|\___|  \_| \_\__,_|_| |_|\__|_|_| |_| |_|\___|  *
+*                                                                    *
+*                                                                    *
+* Mule Runtime and Integration Platform                              *
+* Version: 4.9.0 Build: 653df691                                     *
+* MuleSoft, Inc.                                                     *
+* For more information go to                                         *
+* https://www.mulesoft.com/platform/soa/mule-esb-enterprise          *
+*                                                                    *
+* Server started: 9/17/26, 5:26 PM                                   *
+* JDK: 17.0.18 (mixed mode, sharing)                                 *
+* JDK properties:                                                    *
+*  - java.vendor = Homebrew                                          *
+*  - java.vm.name = OpenJDK 64-Bit Server VM                         *
+* - java.home =                                                      *
+* /opt/homebrew/Cellar/openjdk@17/17.0.18/libexec/openjdk.jdk/Conten *
+* ts/Home                                                            *
+* OS: Mac OS X (26.6.2, aarch64)                                     *
+* Host: MacBook-Pro.local (127.0.0.1)                                *
+* Mule services:                                                     *
+*  - mule-service-soap-1.9.0                                         *
+*  - api-gateway-contract-service-1.5.0                              *
+*  - api-gateway-events-collector-service-1.5.0                      *
+*  - mule-service-weave-ee-2.9.0                                     *
+*  - mule-service-http-ee-1.12.0                                     *
+*  - mule-service-oauth-ee-1.6.0                                     *
+*  - mule-service-scheduler-1.9.0                                    *
+* Mule system properties:                                            *
+*  - mule.testingMode = true                                         *
+* - mule.home = /Users/peterg./Documents/ChatGPT/Show & Tell         *
+* Codex/apps/inventory-system-api/target/munitworkingdir-31531590803 *
+* 958/container                                                      *
+*  - mule.mode.embedded = true                                       *
+**********************************************************************
+2026-09-17T17:26:32,573 INFO  [Embedded] org.mule.runtime.core.internal.logging - 
+**********************************************************************
+* Cluster configuration                                              *
+*                                                                    *
+* Cluster mode disabled                                              *
+**********************************************************************
+2026-09-17T17:26:32,645 INFO  [Embedded] org.mule.runtime.core.internal.logging - 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ New domain 'default'                                                         +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-09-17T17:26:32,646 INFO  [Embedded] org.mule.runtime.core.internal.logging - 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Initializing domain 'default'                                                +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-09-17T17:26:33,094 INFO  [Embedded] org.mule.runtime.api.metadata.AbstractDataTypeBuilderFactory - Loaded AbstractDataTypeBuilderFactory implementation 'org.mule.runtime.core.api.metadata.DefaultDataTypeBuilderFactory' from classloader 'jdk.internal.loader.Loader@64518270'
+2026-09-17T17:26:33,108 INFO  [Embedded] org.mule.runtime.module.deployment.internal.processor.FallbackArtifactConfigurationProcessor - Serialized AST not avaliable for artifact 'default'
+2026-09-17T17:26:33,207 INFO  [Embedded] org.mule.service.scheduler.internal.config.ContainerThreadPoolsConfig - No thread pools config file found. Using default values.
+2026-09-17T17:26:33,224 INFO  [CronSchedulerHandler] org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2026-09-17T17:26:33,229 INFO  [CronSchedulerHandler] org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2026-09-17T17:26:33,229 INFO  [CronSchedulerHandler] org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+2026-09-17T17:26:33,229 INFO  [CronSchedulerHandler] org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+2026-09-17T17:26:33,230 INFO  [CronSchedulerHandler] org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) '[MuleRuntime].' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 1 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2026-09-17T17:26:33,230 INFO  [CronSchedulerHandler] org.quartz.impl.StdSchedulerFactory - Quartz scheduler '[MuleRuntime].' initialized from an externally provided properties instance.
+2026-09-17T17:26:33,230 INFO  [CronSchedulerHandler] org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+2026-09-17T17:26:33,230 INFO  [Embedded] org.quartz.core.QuartzScheduler - Scheduler [MuleRuntime]._$_NON_CLUSTERED started.
+2026-09-17T17:26:33,236 INFO  [Embedded] org.mule.runtime.core.internal.logging - 
+**********************************************************************
+* Started DefaultSchedulerService                                    *
+*                                                                    *
+* Resolved configuration values:                                     *
+*                                                                    *
+* Pooling strategy:       UBER                                       *
+* gracefulShutdownTimeout:       15000 ms                            *
+* uber.threadPool.maxSize:         781                               *
+* uber.threadPool.threadKeepAlive: 30000 ms                          *
+*                                                                    *
+* These can be modified by editing 'conf/scheduler-pools.conf'       *
+**********************************************************************
+2026-09-17T17:26:33,240 INFO  [ArtifactDeployer.start.01] org.mule.runtime.core.internal.logging - 
+**********************************************************************
+* Domain: default                                                    *
+* OS encoding: UTF-8, Mule encoding: UTF-8                           *
+*                                                                    *
+**********************************************************************
+2026-09-17T17:26:33,241 INFO  [ArtifactDeployer.start.01] org.mule.runtime.core.internal.logging - 
+**********************************************************************
+* Started domain 'default'                                           *
+**********************************************************************
+2026-09-17T17:26:33,243 INFO  [Embedded] org.mule.runtime.core.internal.logging - 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Mule is up and kicking (every 5000ms)                                        +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-09-17T17:26:33,243 INFO  [Embedded] org.mule.runtime.core.internal.logging - 
+**********************************************************************
+*              - - + DOMAIN + - -               * - - + STATUS + - - *
+**********************************************************************
+* default                                       * DEPLOYED           *
+**********************************************************************
+
+2026-09-17T17:26:33,248 INFO  [main] org.mule.munit.remote.container.ContainerSuiteRunDispatcher - Suite will run with MMV 4.9.0
+2026-09-17T17:26:33,295 WARN  [Embedded] org.mule.runtime.module.artifact.activation.internal.classloader.AbstractArtifactClassLoaderConfigurationAssembler - Shared library 'org.mule.runtime:mule-api' is a Mule Runtime dependency. It will not be used by 'munit-runner' in order to avoid classloading issues. Please consider removing it, or at least not putting it as a sharedLibrary.
+2026-09-17T17:26:33,295 WARN  [Embedded] org.mule.runtime.module.artifact.activation.internal.classloader.AbstractArtifactClassLoaderConfigurationAssembler - Shared library 'org.mule.runtime:mule-metadata-model-api' is a Mule Runtime dependency. It will not be used by 'munit-runner' in order to avoid classloading issues. Please consider removing it, or at least not putting it as a sharedLibrary.
+2026-09-17T17:26:33,295 WARN  [Embedded] org.mule.runtime.module.artifact.activation.internal.classloader.AbstractArtifactClassLoaderConfigurationAssembler - Shared library 'org.mule.runtime:mule-message-metadata-model' is a Mule Runtime dependency. It will not be used by 'munit-runner' in order to avoid classloading issues. Please consider removing it, or at least not putting it as a sharedLibrary.
+2026-09-17T17:26:33,295 WARN  [Embedded] org.mule.runtime.module.artifact.activation.internal.classloader.AbstractArtifactClassLoaderConfigurationAssembler - Shared library 'org.mule.runtime:mule-artifact-declaration' is a Mule Runtime dependency. It will not be used by 'munit-runner' in order to avoid classloading issues. Please consider removing it, or at least not putting it as a sharedLibrary.
+2026-09-17T17:26:33,295 WARN  [Embedded] org.mule.runtime.module.artifact.activation.internal.classloader.AbstractArtifactClassLoaderConfigurationAssembler - Shared library 'org.mule.runtime:mule-artifact-declaration-persistence' is a Mule Runtime dependency. It will not be used by 'munit-runner' in order to avoid classloading issues. Please consider removing it, or at least not putting it as a sharedLibrary.
+2026-09-17T17:26:33,295 WARN  [Embedded] org.mule.runtime.module.artifact.activation.internal.classloader.AbstractArtifactClassLoaderConfigurationAssembler - Shared library 'org.mule.runtime:api-annotations' is a Mule Runtime dependency. It will not be used by 'munit-runner' in order to avoid classloading issues. Please consider removing it, or at least not putting it as a sharedLibrary.
+2026-09-17T17:26:33,295 WARN  [Embedded] org.mule.runtime.module.artifact.activation.internal.classloader.AbstractArtifactClassLoaderConfigurationAssembler - Shared library 'org.mule.runtime:mule-embedded-api' is a Mule Runtime dependency. It will not be used by 'munit-runner' in order to avoid classloading issues. Please consider removing it, or at least not putting it as a sharedLibrary.
+2026-09-17T17:26:33,296 WARN  [Embedded] org.mule.runtime.module.artifact.activation.internal.classloader.AbstractArtifactClassLoaderConfigurationAssembler - Shared library 'org.mule.runtime:mule-embedded-commons' is a Mule Runtime dependency. It will not be used by 'munit-runner' in order to avoid classloading issues. Please consider removing it, or at least not putting it as a sharedLibrary.
+2026-09-17T17:26:33,296 WARN  [Embedded] org.mule.runtime.module.artifact.activation.internal.classloader.AbstractArtifactClassLoaderConfigurationAssembler - Shared library 'org.mule.runtime:mule-api' is a Mule Runtime dependency. It will not be used by 'munit-runner' in order to avoid classloading issues. Please consider removing it, or at least not putting it as a sharedLibrary.
+2026-09-17T17:26:33,296 WARN  [Embedded] org.mule.runtime.module.artifact.activation.internal.classloader.AbstractArtifactClassLoaderConfigurationAssembler - Shared library 'org.mule.runtime:mule-metadata-model-api' is a Mule Runtime dependency. It will not be used by 'munit-runner' in order to avoid classloading issues. Please consider removing it, or at least not putting it as a sharedLibrary.
+2026-09-17T17:26:33,296 WARN  [Embedded] org.mule.runtime.module.artifact.activation.internal.classloader.AbstractArtifactClassLoaderConfigurationAssembler - Shared library 'org.mule.runtime:mule-message-metadata-model' is a Mule Runtime dependency. It will not be used by 'munit-runner' in order to avoid classloading issues. Please consider removing it, or at least not putting it as a sharedLibrary.
+2026-09-17T17:26:33,296 WARN  [Embedded] org.mule.runtime.module.artifact.activation.internal.classloader.AbstractArtifactClassLoaderConfigurationAssembler - Shared library 'org.mule.runtime:mule-artifact-declaration' is a Mule Runtime dependency. It will not be used by 'munit-runner' in order to avoid classloading issues. Please consider removing it, or at least not putting it as a sharedLibrary.
+2026-09-17T17:26:33,296 WARN  [Embedded] org.mule.runtime.module.artifact.activation.internal.classloader.AbstractArtifactClassLoaderConfigurationAssembler - Shared library 'org.mule.runtime:mule-artifact-declaration-persistence' is a Mule Runtime dependency. It will not be used by 'munit-runner' in order to avoid classloading issues. Please consider removing it, or at least not putting it as a sharedLibrary.
+2026-09-17T17:26:33,296 WARN  [Embedded] org.mule.runtime.module.artifact.activation.internal.classloader.AbstractArtifactClassLoaderConfigurationAssembler - Shared library 'org.mule.runtime:api-annotations' is a Mule Runtime dependency. It will not be used by 'munit-runner' in order to avoid classloading issues. Please consider removing it, or at least not putting it as a sharedLibrary.
+2026-09-17T17:26:33,296 WARN  [Embedded] org.mule.runtime.module.artifact.activation.internal.classloader.AbstractArtifactClassLoaderConfigurationAssembler - Shared library 'org.mule.runtime:mule-embedded-api' is a Mule Runtime dependency. It will not be used by 'munit-runner' in order to avoid classloading issues. Please consider removing it, or at least not putting it as a sharedLibrary.
+2026-09-17T17:26:33,296 WARN  [Embedded] org.mule.runtime.module.artifact.activation.internal.classloader.AbstractArtifactClassLoaderConfigurationAssembler - Shared library 'org.mule.runtime:mule-embedded-commons' is a Mule Runtime dependency. It will not be used by 'munit-runner' in order to avoid classloading issues. Please consider removing it, or at least not putting it as a sharedLibrary.
+2026-09-17T17:26:33,301 WARN  [Embedded] org.mule.runtime.module.artifact.activation.internal.classloader.AbstractArtifactClassLoaderConfigurationAssembler - Shared library 'org.mule.runtime:mule-api' is a Mule Runtime dependency. It will not be used by 'munit-tools' in order to avoid classloading issues. Please consider removing it, or at least not putting it as a sharedLibrary.
+2026-09-17T17:26:33,301 WARN  [Embedded] org.mule.runtime.module.artifact.activation.internal.classloader.AbstractArtifactClassLoaderConfigurationAssembler - Shared library 'org.mule.runtime:mule-metadata-model-api' is a Mule Runtime dependency. It will not be used by 'munit-tools' in order to avoid classloading issues. Please consider removing it, or at least not putting it as a sharedLibrary.
+2026-09-17T17:26:33,301 WARN  [Embedded] org.mule.runtime.module.artifact.activation.internal.classloader.AbstractArtifactClassLoaderConfigurationAssembler - Shared library 'org.mule.runtime:mule-message-metadata-model' is a Mule Runtime dependency. It will not be used by 'munit-tools' in order to avoid classloading issues. Please consider removing it, or at least not putting it as a sharedLibrary.
+2026-09-17T17:26:33,302 WARN  [Embedded] org.mule.runtime.module.artifact.activation.internal.classloader.AbstractArtifactClassLoaderConfigurationAssembler - Shared library 'org.mule.runtime:mule-artifact-declaration' is a Mule Runtime dependency. It will not be used by 'munit-tools' in order to avoid classloading issues. Please consider removing it, or at least not putting it as a sharedLibrary.
+2026-09-17T17:26:33,302 WARN  [Embedded] org.mule.runtime.module.artifact.activation.internal.classloader.AbstractArtifactClassLoaderConfigurationAssembler - Shared library 'org.mule.runtime:mule-artifact-declaration-persistence' is a Mule Runtime dependency. It will not be used by 'munit-tools' in order to avoid classloading issues. Please consider removing it, or at least not putting it as a sharedLibrary.
+2026-09-17T17:26:33,302 WARN  [Embedded] org.mule.runtime.module.artifact.activation.internal.classloader.AbstractArtifactClassLoaderConfigurationAssembler - Shared library 'org.mule.runtime:api-annotations' is a Mule Runtime dependency. It will not be used by 'munit-tools' in order to avoid classloading issues. Please consider removing it, or at least not putting it as a sharedLibrary.
+2026-09-17T17:26:33,302 WARN  [Embedded] org.mule.runtime.module.artifact.activation.internal.classloader.AbstractArtifactClassLoaderConfigurationAssembler - Shared library 'org.mule.runtime:mule-api' is a Mule Runtime dependency. It will not be used by 'munit-tools' in order to avoid classloading issues. Please consider removing it, or at least not putting it as a sharedLibrary.
+2026-09-17T17:26:33,302 WARN  [Embedded] org.mule.runtime.module.artifact.activation.internal.classloader.AbstractArtifactClassLoaderConfigurationAssembler - Shared library 'org.mule.runtime:mule-metadata-model-api' is a Mule Runtime dependency. It will not be used by 'munit-tools' in order to avoid classloading issues. Please consider removing it, or at least not putting it as a sharedLibrary.
+2026-09-17T17:26:33,302 WARN  [Embedded] org.mule.runtime.module.artifact.activation.internal.classloader.AbstractArtifactClassLoaderConfigurationAssembler - Shared library 'org.mule.runtime:mule-message-metadata-model' is a Mule Runtime dependency. It will not be used by 'munit-tools' in order to avoid classloading issues. Please consider removing it, or at least not putting it as a sharedLibrary.
+2026-09-17T17:26:33,302 WARN  [Embedded] org.mule.runtime.module.artifact.activation.internal.classloader.AbstractArtifactClassLoaderConfigurationAssembler - Shared library 'org.mule.runtime:mule-artifact-declaration' is a Mule Runtime dependency. It will not be used by 'munit-tools' in order to avoid classloading issues. Please consider removing it, or at least not putting it as a sharedLibrary.
+2026-09-17T17:26:33,302 WARN  [Embedded] org.mule.runtime.module.artifact.activation.internal.classloader.AbstractArtifactClassLoaderConfigurationAssembler - Shared library 'org.mule.runtime:mule-artifact-declaration-persistence' is a Mule Runtime dependency. It will not be used by 'munit-tools' in order to avoid classloading issues. Please consider removing it, or at least not putting it as a sharedLibrary.
+2026-09-17T17:26:33,302 WARN  [Embedded] org.mule.runtime.module.artifact.activation.internal.classloader.AbstractArtifactClassLoaderConfigurationAssembler - Shared library 'org.mule.runtime:api-annotations' is a Mule Runtime dependency. It will not be used by 'munit-tools' in order to avoid classloading issues. Please consider removing it, or at least not putting it as a sharedLibrary.
+2026-09-17T17:26:33,327 INFO  [Embedded] org.mule.runtime.core.internal.logging - 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ New app 'inventory-system-api'                                               +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-09-17T17:26:33,327 INFO  [Embedded] org.mule.runtime.core.internal.logging - 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Initializing app 'inventory-system-api'                                      +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-09-17T17:26:34,505 INFO  [Embedded] org.mule.runtime.api.el.AbstractBindingContextBuilderFactory - Loaded BindingContextBuilderFactory implementation 'org.mule.runtime.core.api.el.DefaultBindingContextBuilderFactory' from classloader 'jdk.internal.loader.Loader@64518270'
+2026-09-17T17:26:34,510 WARN  [Embedded] org.mule.runtime.core.internal.el.DefaultBindingContextBuilder$BindingContextImplementation - Two modules with namespace 'Munit' were found in a binding context. Set log level to DEBUG for details
+2026-09-17T17:26:34,511 WARN  [Embedded] org.mule.runtime.core.internal.el.DefaultBindingContextBuilder$BindingContextImplementation - Two modules with namespace 'Batch' were found in a binding context. Set log level to DEBUG for details
+2026-09-17T17:26:34,739 INFO  [Embedded] org.mule.runtime.core.internal.util.journal.TransactionJournal - Using files for tx logs /Users/peterg./Documents/ChatGPT/Show & Tell Codex/apps/inventory-system-api/target/munitworkingdir-31531590803958/container/./.mule/inventory-system-api/queue-tx-log/tx1.log and /Users/peterg./Documents/ChatGPT/Show & Tell Codex/apps/inventory-system-api/target/munitworkingdir-31531590803958/container/./.mule/inventory-system-api/queue-tx-log/tx2.log
+2026-09-17T17:26:34,740 INFO  [Embedded] org.mule.runtime.core.internal.util.journal.TransactionJournal - Using files for tx logs /Users/peterg./Documents/ChatGPT/Show & Tell Codex/apps/inventory-system-api/target/munitworkingdir-31531590803958/container/./.mule/inventory-system-api/queue-xa-tx-log/tx1.log and /Users/peterg./Documents/ChatGPT/Show & Tell Codex/apps/inventory-system-api/target/munitworkingdir-31531590803958/container/./.mule/inventory-system-api/queue-xa-tx-log/tx2.log
+2026-09-17T17:26:34,805 INFO  [ArtifactDeployer.start.01] org.mule.runtime.core.internal.logging - 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Starting app 'inventory-system-api'                                          +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-09-17T17:26:34,806 INFO  [ArtifactDeployer.start.01] org.mule.runtime.core.internal.util.queue.QueueXaResourceManager - Starting ResourceManager
+2026-09-17T17:26:34,806 INFO  [ArtifactDeployer.start.01] org.mule.runtime.core.internal.util.queue.QueueXaResourceManager - Started ResourceManager
+2026-09-17T17:26:34,810 INFO  [ArtifactDeployer.start.01] org.mule.runtime.core.internal.logging - 
+**********************************************************************
+* Application: inventory-system-api                                  *
+* OS encoding: UTF-8, Mule encoding: UTF-8                           *
+*                                                                    *
+**********************************************************************
+2026-09-17T17:26:34,810 INFO  [ArtifactDeployer.start.01] org.mule.runtime.core.internal.logging - 
+**********************************************************************
+* Started app 'inventory-system-api'                                 *
+* Application plugins:                                               *
+*  - MUnit : 3.4.0                                                   *
+*  - MUnit Tools : 3.4.0                                             *
+*  - Sockets : 1.2.5                                                 *
+*  - HTTP : 1.10.3                                                   *
+**********************************************************************
+2026-09-17T17:26:34,817 INFO  [munit.01] org.mule.munit.runner.remote.api.server.RunnerServer - Waiting for client connection 
+2026-09-17T17:26:35,824 INFO  [munit.01] org.mule.munit.runner.remote.api.server.RunnerServer - Client connection received from localhost - true
+2026-09-17T17:26:37,915 WARN  [munit.01] org.mule.runtime.config.internal.dsl.spring.ComponentConfigurationBuilder - Parameter ignore from extension munit has a defaultValue configured in the componentBuildingDefinition but not in the extensionModel.
+2026-09-17T17:26:38,039 INFO  [munit.01] org.mule.runtime.api.message.AbstractMuleMessageBuilderFactory - Loaded MuleMessageBuilderFactory implementation 'org.mule.runtime.core.internal.message.DefaultMessageBuilderFactory' from classloader 'jdk.internal.loader.Loader@64518270'
+Sep 17, 2026 5:26:38 PM org.mule.weave.v2.el.WeaveScriptingParser $anonfun$parseWithCache$2
+WARNING: Import directive `dw::core::Objects` is not being used. at WeaveLocation([index: 296, line: 12, column: 1],[index: 342, line: 12, column: 47],dw::util::Diff)
+Sep 17, 2026 5:26:38 PM org.mule.weave.v2.el.WeaveScriptingParser $anonfun$parseWithCache$2
+WARNING: `Internal` is experimental this means that it may change or even be removed in the future. Use it at your own risk. at WeaveLocation([index: 50, line: -1, column: -1],[index: 61, line: -1, column: -1],anonymous)
+================================================================================
+=== Running suite: contracts-test.xml                                        ===
+================================================================================
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Running test: numeric-stock-remains-numeric                                  +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+2026-09-17T17:26:38,464 INFO  [munit.01] org.mule.munit.runner.model.Suite - SUCCESS - test: numeric-stock-remains-numeric - Time elapsed: 0.14 sec
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Running test: string-stock-is-normalised                                     +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+java.lang.AssertionError: Inventory contract requires a number for every warehouse at file: [contracts-test.xml], line: [5]
+Expected: 12
+     but: "12" as String {encoding: "UTF-8", mediaType: "application/json; charset=UTF-8", mimeType: "application/json", contentLength: 4} at (root)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-09-17T17:26:38,489 ERROR [munit.01] org.mule.munit.runner.model.Suite - FAILURE - test: string-stock-is-normalised - Time elapsed: 0.02 sec
+
+
+================================================================================
+= Tests run: 2 - Failed: 1 - Errors: 0 - Skipped: 0 - Time elapsed: 0.17 sec   =
+================================================================================
+2026-09-17T17:26:38,489 INFO  [munit.01] org.mule.munit.runner.remote.api.server.RunnerServer - Waiting for client connection 
+
+
+2026-09-17T17:26:38,490 INFO  [Embedded] org.mule.runtime.module.deployment.internal.DefaultArchiveDeployer - ================== Request to Undeploy Artifact: inventory-system-api
+2026-09-17T17:26:38,490 INFO  [Embedded] org.mule.runtime.core.internal.logging - 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Stopping application 'inventory-system-api'                                  +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-09-17T17:26:38,491 INFO  [Embedded] org.mule.runtime.core.internal.util.queue.QueueXaResourceManager - Stopping ResourceManager
+2026-09-17T17:26:38,491 INFO  [Embedded] org.mule.runtime.core.internal.util.queue.QueueXaResourceManager - Stopped ResourceManager
+2026-09-17T17:26:38,494 INFO  [Embedded] org.mule.runtime.core.internal.logging - 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Disposing application 'inventory-system-api'                                 +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-09-17T17:26:38,494 INFO  [Embedded] org.mule.runtime.core.internal.logging - Stopping app 'inventory-system-api' with no mule context
+2026-09-17T17:26:38,688 INFO  [Embedded] org.mule.runtime.core.internal.logging - 
+**********************************************************************
+* Application "inventory-system-api" shut down normally on:          *
+* 9/17/26, 5:26 PM                                                   *
+* Up for: 0 days, 0 hours, 0 mins, 3.882 sec                         *
+**********************************************************************
+2026-09-17T17:26:38,753 INFO  [Embedded] org.mule.runtime.core.internal.logging - 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Undeployed artifact 'inventory-system-api'                                   +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-09-17T17:26:38,754 INFO  [Embedded] org.mule.runtime.core.internal.logging - 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Stopping domain 'default'                                                    +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-09-17T17:26:38,755 INFO  [Embedded] org.mule.runtime.core.internal.logging - 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Disposing domain 'default'                                                   +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-09-17T17:26:38,755 INFO  [Embedded] org.mule.runtime.core.internal.logging - Stopping domain 'default' with no mule context
+2026-09-17T17:26:38,755 INFO  [Embedded] org.mule.runtime.core.internal.logging - 
+**********************************************************************
+* Domain "default" shut down normally on: 9/17/26, 5:26 PM           *
+* Up for: 0 days, 0 hours, 0 mins, 5.518 sec                         *
+**********************************************************************
+2026-09-17T17:26:38,841 INFO  [Embedded] org.mule.service.scheduler.internal.service.DefaultSchedulerService - Stopping DefaultSchedulerService...
+2026-09-17T17:26:38,897 INFO  [Embedded] org.quartz.core.QuartzScheduler - Scheduler [MuleRuntime]._$_NON_CLUSTERED shutting down.
+2026-09-17T17:26:38,897 INFO  [Embedded] org.quartz.core.QuartzScheduler - Scheduler [MuleRuntime]._$_NON_CLUSTERED paused.
+2026-09-17T17:26:39,289 INFO  [Embedded] org.quartz.core.QuartzScheduler - Scheduler [MuleRuntime]._$_NON_CLUSTERED shutdown complete.
+2026-09-17T17:26:39,290 INFO  [Embedded] org.mule.service.scheduler.internal.service.DefaultSchedulerService - Stopped org.mule.service.scheduler.internal.service.DefaultSchedulerService$1@45ea1b8c
+
+
+2026-09-17T17:26:40,299 INFO  [main] org.mule.munit.remote.RemoteRunner - Done
+[INFO] ====================================================================================
+[INFO] MUnit Run Summary - Product: MULE_EE, Version: 4.9.0
+[INFO] ====================================================================================
+[INFO]  >> contracts-test.xml test result: Tests: 2, Errors: 0, Failures: 1, Skipped: 0
+[INFO] 	 --- string-stock-is-normalised <<< FAILED
+[INFO] 	
+[INFO] ====================================================================================
+[INFO]  > Tests:   	2
+[INFO]  > Errors:  	0
+[INFO]  > Failures:	1
+[INFO]  > Skipped: 	0
+[INFO] ====================================================================================
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for click-collect-demo 1.0.0:
+[INFO] 
+[INFO] click-collect-demo ................................. SUCCESS [  0.001 s]
+[INFO] inventory-system-api ............................... FAILURE [ 17.424 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  18.657 s
+[INFO] Finished at: 2026-09-17T17:26:40+01:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal com.mulesoft.munit.tools:munit-maven-plugin:3.4.0:test (test) on project inventory-system-api: Build Failed: MUnit Tests Failed -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <args> -rf :inventory-system-api

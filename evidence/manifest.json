@@ -1,0 +1,29 @@
+{
+  "syntheticBusinessTraffic": true,
+  "execution": "Actual HTTP requests through four local Mule 4.9.0 applications and a Python/SQLite mock backend",
+  "java": "17",
+  "phases": {
+    "baseline": {
+      "requests": 500,
+      "statuses": {
+        "201": 500
+      },
+      "firstTimestamp": "2026-09-17T16:25:22.061191+00:00",
+      "lastTimestamp": "2026-09-17T16:25:30.967082+00:00"
+    },
+    "incident": {
+      "requests": 1000,
+      "statuses": {
+        "502": 80,
+        "201": 920
+      },
+      "firstTimestamp": "2026-09-17T16:26:08.137085+00:00",
+      "lastTimestamp": "2026-09-17T16:26:19.170250+00:00"
+    }
+  },
+  "notes": [
+    "Application/runtime logs also include the final smoke checks and inventory redeployment.",
+    "evidence/api decodes JSON-encoded event strings into JSON objects; evidence/raw-api preserves original Mule logger bytes. Runtime output is unchanged.",
+    "The request ledger is authoritative for the phase success/failure counts."
+  ]
+}

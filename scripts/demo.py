@@ -29,7 +29,17 @@ def deploy(app=None):
   jar=R/'apps'/a/'target'/f'{a}-1.0.0-mule-application.jar'
   if not jar.exists():sys.exit('Missing package. Run python3 scripts/demo.py build first.')
   # Stage outside apps; rename atomically so Mule never sees a partial JAR.
+  port=8081+APPS.index(a);was_running=health(port)
+  anchor=MULE/'apps'/(a+'-anchor.txt')
+  old_anchor=anchor.stat().st_mtime_ns if anchor.exists() else 0
   tmp=MULE/(a+'.jar.tmp');shutil.copy2(jar,tmp);tmp.replace(MULE/'apps'/(a+'.jar'))
+  if was_running:
+   for _ in range(120):
+    if anchor.exists() and anchor.stat().st_mtime_ns>old_anchor and health(port):
+     print(a+' redeployed and healthy.');break
+    time.sleep(1)
+   else:sys.exit(a+' redeployment timed out. Inspect .run/mule-console.log.')
+  else:print(a+' staged for runtime startup.')
 def wait_ready(proc):
  for _ in range(120):
   if proc.poll() is not None:

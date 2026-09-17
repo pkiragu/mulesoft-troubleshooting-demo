@@ -1,0 +1,21 @@
+diff --git a/apps/inventory-system-api/src/main/resources/dw/normalise-stock.dwl b/apps/inventory-system-api/src/main/resources/dw/normalise-stock.dwl
+index 25b74e5..56e2ced 100644
+--- a/apps/inventory-system-api/src/main/resources/dw/normalise-stock.dwl
++++ b/apps/inventory-system-api/src/main/resources/dw/normalise-stock.dwl
+@@ -4,5 +4,5 @@ output application/json
+ {
+     sku: payload.sku,
+     storeId: payload.storeId,
+-    availableQuantity: payload.availableQuantity
++    availableQuantity: payload.availableQuantity as Number
+ }
+diff --git a/apps/inventory-system-api/src/test/munit/contracts-test.xml b/apps/inventory-system-api/src/test/munit/contracts-test.xml
+index 74ffabe..da249a6 100644
+--- a/apps/inventory-system-api/src/test/munit/contracts-test.xml
++++ b/apps/inventory-system-api/src/test/munit/contracts-test.xml
+@@ -2,4 +2,5 @@
+ <mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd http://www.mulesoft.org/schema/mule/munit-tools http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+ <munit:config name="tests"/>
+ <munit:test name="numeric-stock-remains-numeric"><munit:execution><munit:set-event><munit:payload value='#[{sku: "LAPTOP-01", storeId: "LONDON-01", availableQuantity: 12}]' mediaType="application/java"/></munit:set-event><flow-ref name="normalise-stock"/></munit:execution><munit:validation><munit-tools:assert-that expression="#[payload.availableQuantity]" is="#[MunitTools::equalTo(12)]"/></munit:validation></munit:test>
++<munit:test name="string-stock-is-normalised"><munit:execution><munit:set-event><munit:payload value='#[{sku: "LAPTOP-01", storeId: "BRISTOL-02", availableQuantity: "12"}]' mediaType="application/java"/></munit:set-event><flow-ref name="normalise-stock"/></munit:execution><munit:validation><munit-tools:assert-that expression="#[payload.availableQuantity]" is="#[MunitTools::equalTo(12)]" message="Inventory contract requires a number for every warehouse"/></munit:validation></munit:test>
+ </mule>

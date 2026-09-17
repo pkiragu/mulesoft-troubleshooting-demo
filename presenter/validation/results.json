@@ -1,0 +1,32 @@
+{
+  "runtime": "Mule 4.9.0 in local testing mode",
+  "java": "17",
+  "baseline": {
+    "requests": 500,
+    "success": 500,
+    "failure": 0
+  },
+  "incident": {
+    "requests": 1000,
+    "success": 920,
+    "failure": 80
+  },
+  "fixed": {
+    "requests": 100,
+    "success": 100,
+    "failure": 0
+  },
+  "regressionBefore": {
+    "tests": 2,
+    "assertionFailures": 1,
+    "errors": 0
+  },
+  "regressionAfter": {
+    "inventoryTests": 2,
+    "processTests": 2,
+    "failures": 0,
+    "errors": 0
+  },
+  "finalState": "Incident mapping restored in source and deployed runtime; original numeric-only inventory test restored",
+  "evidenceTraceValidation": "All 1500 recorded requests have complete expected cross-API traces; failed requests do not reach Order System API"
+}

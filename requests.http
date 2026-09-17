@@ -1,0 +1,28 @@
+### London checkout
+POST http://127.0.0.1:8084/checkout
+Content-Type: application/json
+x-correlation-id: live-london-001
+
+{"sku":"LAPTOP-01","storeId":"LONDON-01","quantity":1}
+
+### Bristol checkout
+POST http://127.0.0.1:8084/checkout
+Content-Type: application/json
+x-correlation-id: live-bristol-001
+
+{"sku":"LAPTOP-01","storeId":"BRISTOL-02","quantity":1}
+
+### London stock
+GET http://127.0.0.1:8081/stock?sku=LAPTOP-01&storeId=LONDON-01
+x-correlation-id: live-stock-london-001
+
+### Bristol stock
+GET http://127.0.0.1:8081/stock?sku=LAPTOP-01&storeId=BRISTOL-02
+x-correlation-id: live-stock-bristol-001
+
+### Out-of-stock business rule
+POST http://127.0.0.1:8084/checkout
+Content-Type: application/json
+x-correlation-id: live-out-of-stock-001
+
+{"sku":"MONITOR-03","storeId":"LONDON-01","quantity":1}

@@ -10,5 +10,10 @@ else:
  for name,offset in json.loads(state.read_text()).items():
   src=R/name;dest=R/'evidence'/('api' if src.suffix=='.jsonl' else 'runtime')/src.name.replace('${sys:domainId}-','')
   dest.parent.mkdir(parents=True,exist_ok=True)
-  with src.open('rb') as f:f.seek(offset);dest.write_bytes(f.read())
+  with src.open('rb') as f:f.seek(offset);raw=f.read();dest.write_bytes(raw)
+  if src.suffix=='.jsonl':
+   backup=R/'evidence/raw-api'/dest.name;backup.parent.mkdir(exist_ok=True);backup.write_bytes(raw)
+   records=[json.loads(line) for line in raw.decode().splitlines() if line.strip()]
+   records=[json.loads(row) if isinstance(row,str) else row for row in records]
+   dest.write_text(''.join(json.dumps(row)+'\n' for row in records))
  print('Captured original application events and runtime output into evidence/.')

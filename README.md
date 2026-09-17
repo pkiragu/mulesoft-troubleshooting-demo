@@ -38,7 +38,7 @@ The other store is `BRISTOL-02`. Products are `LAPTOP-01`, `HEADSET-02`, and `MO
 
 ## Investigate
 
-Start with [the incident brief](docs/incident-brief.md). `evidence/requests.jsonl` records real HTTP outcomes. `evidence/api/` contains structured events captured from the Mule runtime, and `evidence/runtime/` contains runtime exception logs. Correlation IDs link all layers. Git history records the releases.
+Start with [the incident brief](docs/incident-brief.md). `evidence/requests.jsonl` records real HTTP outcomes. `evidence/api/` contains decoded structured events captured from the Mule runtime (`evidence/raw-api/` preserves the original bytes), and `evidence/runtime/` contains runtime exception logs. Correlation IDs link all layers. Git history records the releases.
 
 ```sh
 JAVA_HOME=$(/usr/libexec/java_home -v 17) mvn -B test
@@ -52,7 +52,7 @@ python3 scripts/demo.py build --app inventory-system-api
 python3 scripts/demo.py deploy --app inventory-system-api
 ```
 
-Wait for the application deployment success in `.run/mule-console.log` before making requests. The intended regression is left present for the live investigation.
+The deploy command waits for a new deployment marker and a healthy listener before returning when the app is already running. The intended regression is left present for the live investigation.
 
 ## Scope
 
