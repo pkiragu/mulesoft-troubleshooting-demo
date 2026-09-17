@@ -29,7 +29,7 @@ The approved `github-demo-deployer` Connected App has Design Center Developer, E
 
 `cloud/mock-backend` is an additional Mule app with a bounded, in-memory Java warehouse. It preserves the London numeric / Bristol string distinction, atomic reservations, idempotent order creation and retrieval. It holds at most 20,000 reservations, uses one replica, and resets on restart. It is synthetic demonstration data only, with no authentication or production durability. The original local SQLite backend is unchanged.
 
-Build it with `mvn -Pcloud package`. The ordinary local demo scripts continue to run the four APIs and Python backend. API defaults remain loopback HTTP; CloudHub overrides listener address/port and downstream HTTPS hosts. `scripts/cloud_deploy.py --prepare 1.0.NUMBER` creates isolated standalone Exchange POMs under ignored `.run/cloud-build`, preserving the original project's coordinates and incident line.
+Build it with `mvn -Pcloud package`. The ordinary local demo scripts continue to run the four APIs and Python backend. API defaults remain loopback HTTP; CloudHub overrides listener address/port and downstream HTTPS hosts. Cloud staging omits the local `log4j2.xml` so CloudHub uses its managed, collected logging configuration. Local console and JSONL logging remain intact. `scripts/cloud_deploy.py --prepare 1.0.NUMBER` creates isolated standalone Exchange POMs under ignored `.run/cloud-build`, preserving the original project's coordinates and incident line.
 
 ## Free allowance
 

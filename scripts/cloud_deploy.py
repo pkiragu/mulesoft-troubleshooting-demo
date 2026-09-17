@@ -40,6 +40,9 @@ def prepare(version):
         dest = STAGE/name
         dest.mkdir(exist_ok=True)
         shutil.copytree(source/'src', dest/'src', dirs_exist_ok=True)
+        # CloudHub supplies its own collected logging configuration. The local
+        # console/JSONL appenders are for the developer runtime only.
+        (dest/'src/main/resources/log4j2.xml').unlink(missing_ok=True)
         shutil.copy2(source/'mule-artifact.json', dest/'mule-artifact.json')
         pom = ET.parse(source/'pom.xml').getroot()
         pom.remove(pom.find('m:parent', N))
@@ -139,7 +142,7 @@ def deploy():
         subprocess.run(mvn+['clean','deploy','-DskipMunitTests'],env=runenv,check=True)
         jar=list((STAGE/name/'target').glob('*-mule-application.jar'))
         if len(jar)!=1: raise RuntimeError('Expected one published application package')
-        subprocess.run(mvn+['mule:deploy','-DmuleDeploy','-Dartifact='+str(jar[0])],env=runenv,check=True)
+        subprocess.run(mvn+['mule:deploy','-DmuleDeploy'],env=runenv,check=True)
         url=discover_url(token,env_id,name)
         health(url)
         urls[name]=url
