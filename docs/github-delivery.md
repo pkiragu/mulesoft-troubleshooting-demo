@@ -9,7 +9,7 @@ Target: Show and Tell Demo / Sandbox / CloudHub 2.0 US East (Ohio). The trial sh
 - **Mule - package** runs on main pushes, pull requests and manual dispatch. It packages the four API apps on Java 17 and saves JARs, source commit and checksums for one day.
 - **Mule - deploy CloudHub trial** is manually dispatched on main. Select `incident` for the broken demo or `fixed` after the repair. It checks mock backend contracts, packages all five apps, then publishes and deploys backend → inventory system → order system → order process → shopping experience. It discovers the actual CloudHub URLs and uses HTTPS for downstream calls. Health checks and London/Bristol checkout status checks must pass.
 
-Deployment uses unique Exchange versions derived from run number and attempt. Each app is packaged and published in the same Maven deployment invocation. Deployed JARs and URLs are saved in the run artifact; the successful run summary links the services. Concurrent deployments are serialized. Deployment can partially complete: inspect failed runs before retrying. A full redeployment resets the cloud mock's data.
+Deployment uses unique Exchange versions derived from run number and attempt. Each app is packaged and published to Exchange, then the same package is passed to the Mule deployment goal. Deployed JARs and URLs are saved in the run artifact; the successful run summary links the services. Concurrent deployments are serialized. Deployment can partially complete: inspect failed runs before retrying. A full redeployment resets the cloud mock's data.
 
 ## Tests and trial limitation
 
@@ -43,4 +43,4 @@ Sources:
 
 ## Verification status
 
-Local backend packaging and real Mule HTTP checks passed, including data types, reservations, order retrieval, idempotency and stock rejection. GitHub publication and cloud deployment must be verified from the actual workflow run; the existence of these files alone is not evidence of deployment.
+Local MUnit verification and backend contract checks passed. Real Mule HTTP backend checks passed for data types, reservations, order retrieval, idempotency and stock rejection. Hosted package run 35249156773 passed. Initial CloudHub run 35249164386 authenticated successfully but failed on a region discovery HTTP 403 before creating an application; the required CloudHub/Exchange scope update is prepared pending confirmation. Live deployment is not yet verified.

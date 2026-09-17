@@ -70,4 +70,16 @@ Do not use the reverse patch if the live investigation made different changes. I
 
 ## Caveats to say accurately
 
-This is genuine Mule execution with synthetic business data, not production telemetry. The apps run in a local developer/testing runtime, not in the Anypoint trial cloud. RAML contracts are included, but APIkit routing, authentication, distributed recovery and payment are outside this demonstration. The code intentionally contains one regression for investigation.
+This is genuine Mule execution with synthetic business data, not production telemetry. The original captured evidence comes from the local developer/testing runtime. Additional cloud evidence must be labelled separately. See `docs/github-delivery.md` for the CloudHub workflow and its test limitations. RAML contracts are included, but APIkit routing, authentication, distributed recovery and payment are outside this demonstration. The code intentionally contains one regression for investigation.
+
+## Cloud delivery extension
+
+The private GitHub repository is https://github.com/pkiragu/mulesoft-troubleshooting-demo. The manual **Mule - deploy CloudHub trial** workflow deploys the full stack. Choose `incident` before the repair and `fixed` after pushing the repair. Deployment resets the in-memory cloud mock; allow time for five workers to start. Its hosted checks include backend contracts and live checkout outcomes; MUnit runs locally because Enterprise test dependencies are unavailable from the public repository.
+
+Use the Experience URL from the successful workflow summary to generate cloud activity without overwriting the original evidence:
+
+```sh
+python3 scripts/traffic.py --base-url https://YOUR-EXPERIENCE-HOST --phase incident --count 1000 --out .run/cloud-requests.jsonl
+```
+
+For a short presentation, run the already-prepared local diagnosis first and show the successful GitHub deployment run separately; a fresh full cloud deployment can take several minutes.

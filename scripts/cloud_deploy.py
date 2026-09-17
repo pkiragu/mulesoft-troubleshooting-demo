@@ -131,8 +131,12 @@ def deploy():
     outputs.mkdir(parents=True,exist_ok=True)
     for name in APPS:
         print('Packaging, publishing and deploying '+name,flush=True)
-        subprocess.run(['mvn','-B','-ntp','-s',str(STAGE/'settings.xml'),'-f',str(STAGE/name/'pom.xml'),
-            'clean','deploy','-DmuleDeploy','-DskipMunitTests'],env=runenv,check=True)
+        mvn=['mvn','-B','-ntp','-s',str(STAGE/'settings.xml'),'-f',str(STAGE/name/'pom.xml')]
+        # Exchange publication is a separate lifecycle from CloudHub deployment.
+        subprocess.run(mvn+['clean','deploy','-DskipMunitTests'],env=runenv,check=True)
+        jar=list((STAGE/name/'target').glob('*-mule-application.jar'))
+        if len(jar)!=1: raise RuntimeError('Expected one published application package')
+        subprocess.run(mvn+['mule:deploy','-DmuleDeploy','-Dartifact='+str(jar[0])],env=runenv,check=True)
         url=discover_url(token,env_id,name)
         health(url)
         urls[name]=url
