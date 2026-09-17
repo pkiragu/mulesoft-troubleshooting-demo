@@ -1,0 +1,7 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<modelVersion>4.0.0</modelVersion><groupId>com.showtell</groupId><artifactId>click-collect-demo</artifactId><version>1.0.0</version><packaging>pom</packaging>
+<modules><module>apps/inventory-system-api</module><module>apps/order-system-api</module><module>apps/order-process-api</module><module>apps/shopping-experience-api</module></modules>
+<properties><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding><mule.maven.plugin.version>4.3.0</mule.maven.plugin.version><app.runtime>4.9.0</app.runtime><munit.version>3.4.0</munit.version></properties>
+<repositories><repository><id>mulesoft-releases</id><url>https://repository.mulesoft.org/releases/</url></repository></repositories>
+<pluginRepositories><pluginRepository><id>mulesoft-releases</id><url>https://repository.mulesoft.org/releases/</url></pluginRepository></pluginRepositories>
+</project>

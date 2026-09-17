@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+<flow name="fulfil-order"><http:listener config-ref="listener" path="/orders" allowedMethods="POST">
+<http:response statusCode="#[vars.status default 200]"><http:headers>#[{"x-correlation-id": vars.traceId default correlationId}]</http:headers></http:response>
+<http:error-response statusCode="#[vars.status default 500]"><http:body>#[payload]</http:body></http:error-response></http:listener>
+<set-variable variableName="traceId" value='#[attributes.headers."x-correlation-id" default correlationId]'/>
+<set-variable variableName="order" value="#[payload]"/>
+<flow-ref name="validate-order"/>
+<logger level="INFO" category="demo.events" message='#[write({timestamp: now() as String, synthetic: true, event: "order.received", api: p("api.name"), release: p("release.version"), correlationId: vars.traceId default correlationId, storeId: vars.order.storeId, sku: vars.order.sku, quantity: vars.order.quantity}, "application/json", {indent: false})]'/>
+<http:request config-ref="inventory" method="GET" path="/stock" sendCorrelationId="ALWAYS" correlationId="#[vars.traceId]"><http:headers>#[{"x-correlation-id": vars.traceId}]</http:headers><http:query-params>#[{"sku": vars.order.sku, "storeId": vars.order.storeId}]</http:query-params></http:request>
+<flow-ref name="validate-stock"/>
+<choice><when expression="#[payload.availableQuantity &lt; vars.order.quantity]"><raise-error type="APP:OUT_OF_STOCK" description="Insufficient stock"/></when></choice>
+<http:request config-ref="inventory" method="POST" path="/reservations" target="reservation" sendCorrelationId="ALWAYS" correlationId="#[vars.traceId]"><http:body>#[output application/json --- vars.order]</http:body><http:headers>#[{"x-correlation-id": vars.traceId}]</http:headers></http:request>
+<http:request config-ref="orders" method="POST" path="/orders" sendCorrelationId="ALWAYS" correlationId="#[vars.traceId]"><http:body>#[output application/json --- vars.order ++ {reservationId: vars.reservation.reservationId}]</http:body><http:headers>#[{"x-correlation-id": vars.traceId}]</http:headers></http:request>
+<set-variable variableName="status" value="#[201]"/><logger level="INFO" category="demo.events" message='#[write({timestamp: now() as String, synthetic: true, event: "order.completed", api: p("api.name"), release: p("release.version"), correlationId: vars.traceId default correlationId, orderId: payload.orderId, storeId: payload.storeId}, "application/json", {indent: false})]'/>
+<error-handler><on-error-continue type="ANY" logException="true">
+<set-variable variableName="status" value='#[if (error.errorType.identifier == "OUT_OF_STOCK") 409 else if (error.errorType.identifier == "BAD_REQUEST") 400 else if (error.errorType.identifier == "INVALID_STOCK_CONTRACT") 502 else (error.errorMessage.attributes.statusCode default 500)]'/>
+<logger level="ERROR" category="demo.events" message='#[write({timestamp: now() as String, synthetic: true, event: "request.failed", api: p("api.name"), release: p("release.version"), correlationId: vars.traceId default correlationId, errorType: (error.errorType.namespace ++ ":" ++ error.errorType.identifier), detail: error.description, status: vars.status}, "application/json", {indent: false})]'/>
+<ee:transform><ee:message><ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{error: if (vars.status == 409) "OUT_OF_STOCK" else if (vars.status == 400) "BAD_REQUEST" else "DEPENDENCY_FAILURE", correlationId: vars.traceId}
+]]></ee:set-payload></ee:message></ee:transform></on-error-continue></error-handler>
+</flow>
+<sub-flow name="validate-order">
+<choice><when expression='#[not ((vars.order.sku default null) is String and (vars.order.storeId default null) is String and (vars.order.quantity default null) is Number)]'><raise-error type="APP:BAD_REQUEST" description="sku, storeId and numeric quantity are required"/></when></choice>
+<choice><when expression="#[vars.order.quantity &lt;= 0 or floor(vars.order.quantity) != vars.order.quantity]"><raise-error type="APP:BAD_REQUEST" description="quantity must be a positive integer"/></when></choice>
+</sub-flow>
+<sub-flow name="validate-stock">
+<choice><when expression="#[not (payload.availableQuantity is Number)]"><raise-error type="APP:INVALID_STOCK_CONTRACT" description="Inventory contract violation: availableQuantity must be Number"/></when></choice>
+</sub-flow>
+</mule>

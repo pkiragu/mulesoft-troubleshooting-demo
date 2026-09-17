@@ -1,0 +1,56 @@
+#%RAML 1.0
+title: Order Process API
+version: v1
+baseUri: http://localhost:8083
+mediaType: application/json
+protocols: [HTTP]
+types:
+  OrderRequest:
+    type: object
+    additionalProperties: false
+    properties:
+      sku: string
+      storeId: string
+      quantity:
+        type: integer
+        minimum: 1
+    example: {sku: LAPTOP-01, storeId: LONDON-01, quantity: 1}
+  Error:
+    properties:
+      error: string
+      correlationId?: string
+  Order:
+    properties:
+      orderId: string
+      status: string
+      sku: string
+      storeId: string
+      quantity: integer
+      reservationId: string
+/health:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: {status: UP}
+/orders:
+  post:
+    headers:
+      x-correlation-id?: string
+    body:
+      application/json:
+        type: OrderRequest
+    responses:
+      201:
+        body:
+          application/json: Order
+      400:
+        body:
+          application/json: Error
+      409:
+        body:
+          application/json: Error
+      502:
+        body:
+          application/json: Error

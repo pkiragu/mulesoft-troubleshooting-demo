@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+<flow name="create-order"><http:listener config-ref="listener" path="/orders" allowedMethods="POST">
+<http:response statusCode="#[vars.status default 200]"><http:headers>#[{"x-correlation-id": vars.traceId default correlationId}]</http:headers></http:response>
+<http:error-response statusCode="#[vars.status default 500]"><http:body>#[payload]</http:body></http:error-response></http:listener>
+<set-variable variableName="traceId" value='#[attributes.headers."x-correlation-id" default correlationId]'/>
+<http:request config-ref="backend" method="POST" path="/orders" sendCorrelationId="ALWAYS" correlationId="#[vars.traceId]"><http:headers>#[{"x-correlation-id": vars.traceId}]</http:headers></http:request>
+<set-variable variableName="status" value="#[201]"/><logger level="INFO" category="demo.events" message='#[write({timestamp: now() as String, synthetic: true, event: "create-order.completed", api: p("api.name"), release: p("release.version"), correlationId: vars.traceId default correlationId, orderId: payload.orderId}, "application/json", {indent: false})]'/>
+<error-handler><on-error-continue type="ANY" logException="true">
+<set-variable variableName="status" value='#[if (error.errorType.identifier == "OUT_OF_STOCK") 409 else if (error.errorType.identifier == "BAD_REQUEST") 400 else if (error.errorType.identifier == "INVALID_STOCK_CONTRACT") 502 else (error.errorMessage.attributes.statusCode default 500)]'/>
+<logger level="ERROR" category="demo.events" message='#[write({timestamp: now() as String, synthetic: true, event: "request.failed", api: p("api.name"), release: p("release.version"), correlationId: vars.traceId default correlationId, errorType: (error.errorType.namespace ++ ":" ++ error.errorType.identifier), detail: error.description, status: vars.status}, "application/json", {indent: false})]'/>
+<ee:transform><ee:message><ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{error: if (vars.status == 409) "OUT_OF_STOCK" else if (vars.status == 400) "BAD_REQUEST" else "DEPENDENCY_FAILURE", correlationId: vars.traceId}
+]]></ee:set-payload></ee:message></ee:transform></on-error-continue></error-handler>
+</flow>
+<flow name="get-order"><http:listener config-ref="listener" path="/orders/{id}" allowedMethods="GET">
+<http:response statusCode="#[vars.status default 200]"><http:headers>#[{"x-correlation-id": vars.traceId default correlationId}]</http:headers></http:response>
+<http:error-response statusCode="#[vars.status default 500]"><http:body>#[payload]</http:body></http:error-response></http:listener>
+<set-variable variableName="traceId" value='#[attributes.headers."x-correlation-id" default correlationId]'/>
+<http:request config-ref="backend" method="GET" path="#[&quot;/orders/&quot; ++ attributes.uriParams.id]" sendCorrelationId="ALWAYS" correlationId="#[vars.traceId]"><http:headers>#[{"x-correlation-id": vars.traceId}]</http:headers></http:request>
+<logger level="INFO" category="demo.events" message='#[write({timestamp: now() as String, synthetic: true, event: "get-order.completed", api: p("api.name"), release: p("release.version"), correlationId: vars.traceId default correlationId, orderId: payload.orderId}, "application/json", {indent: false})]'/>
+<error-handler><on-error-continue type="ANY" logException="true">
+<set-variable variableName="status" value='#[if (error.errorType.identifier == "OUT_OF_STOCK") 409 else if (error.errorType.identifier == "BAD_REQUEST") 400 else if (error.errorType.identifier == "INVALID_STOCK_CONTRACT") 502 else (error.errorMessage.attributes.statusCode default 500)]'/>
+<logger level="ERROR" category="demo.events" message='#[write({timestamp: now() as String, synthetic: true, event: "request.failed", api: p("api.name"), release: p("release.version"), correlationId: vars.traceId default correlationId, errorType: (error.errorType.namespace ++ ":" ++ error.errorType.identifier), detail: error.description, status: vars.status}, "application/json", {indent: false})]'/>
+<ee:transform><ee:message><ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{error: if (vars.status == 409) "OUT_OF_STOCK" else if (vars.status == 400) "BAD_REQUEST" else "DEPENDENCY_FAILURE", correlationId: vars.traceId}
+]]></ee:set-payload></ee:message></ee:transform></on-error-continue></error-handler>
+</flow>
+</mule>

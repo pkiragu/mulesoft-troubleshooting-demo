@@ -1,0 +1,32 @@
+[
+  {
+    "storeId": "LONDON-01",
+    "sku": "LAPTOP-01",
+    "availableQuantity": 100000
+  },
+  {
+    "storeId": "LONDON-01",
+    "sku": "HEADSET-02",
+    "availableQuantity": 100000
+  },
+  {
+    "storeId": "LONDON-01",
+    "sku": "MONITOR-03",
+    "availableQuantity": 0
+  },
+  {
+    "storeId": "BRISTOL-02",
+    "sku": "LAPTOP-01",
+    "availableQuantity": "100000"
+  },
+  {
+    "storeId": "BRISTOL-02",
+    "sku": "HEADSET-02",
+    "availableQuantity": "100000"
+  },
+  {
+    "storeId": "BRISTOL-02",
+    "sku": "MONITOR-03",
+    "availableQuantity": "0"
+  }
+]

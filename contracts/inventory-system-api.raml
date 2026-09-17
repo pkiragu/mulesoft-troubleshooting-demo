@@ -1,0 +1,76 @@
+#%RAML 1.0
+title: Inventory System API
+version: v1
+baseUri: http://localhost:8081
+mediaType: application/json
+protocols: [HTTP]
+types:
+  OrderRequest:
+    type: object
+    additionalProperties: false
+    properties:
+      sku: string
+      storeId: string
+      quantity:
+        type: integer
+        minimum: 1
+    example: {sku: LAPTOP-01, storeId: LONDON-01, quantity: 1}
+  Error:
+    properties:
+      error: string
+      correlationId?: string
+  Order:
+    properties:
+      orderId: string
+      status: string
+      sku: string
+      storeId: string
+      quantity: integer
+      reservationId: string
+/health:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: {status: UP}
+/stock:
+  get:
+    headers:
+      x-correlation-id?: string
+    queryParameters:
+      sku: string
+      storeId: string
+    responses:
+      200:
+        body:
+          application/json:
+            type: object
+            properties:
+              sku: string
+              storeId: string
+              availableQuantity: number
+            example: {sku: LAPTOP-01, storeId: LONDON-01, availableQuantity: 12}
+      404:
+        body:
+          application/json: Error
+/reservations:
+  post:
+    body:
+      application/json: OrderRequest
+    responses:
+      200:
+        body:
+          application/json:
+            properties:
+              reservationId: string
+      409:
+        body:
+          application/json: Error
+  /{id}:
+    delete:
+      responses:
+        200:
+          body:
+            application/json:
+              example: {released: true}
