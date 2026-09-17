@@ -55,6 +55,9 @@ def prepare(version):
         repo = child(dist, 'repository')
         child(repo, 'id', 'anypoint-exchange')
         child(repo, 'url', f'https://maven.anypoint.mulesoft.com/api/v3/organizations/{ORG}/maven')
+        # Exchange pre-deploy downloads its validation response as an artifact.
+        # distributionManagement alone only configures uploads.
+        pom.find('m:repositories', N).append(copy.deepcopy(repo))
         cfg = pom.find("m:build/m:plugins/m:plugin[m:artifactId='mule-maven-plugin']/m:configuration", N)
         child(cfg, 'classifier', 'mule-application')
         deploy = child(cfg, 'cloudhub2Deployment')
@@ -131,7 +134,7 @@ def deploy():
     outputs.mkdir(parents=True,exist_ok=True)
     for name in APPS:
         print('Packaging, publishing and deploying '+name,flush=True)
-        mvn=['mvn','-B','-ntp','-s',str(STAGE/'settings.xml'),'-f',str(STAGE/name/'pom.xml')]
+        mvn=['mvn','-B','-ntp','-e','-s',str(STAGE/'settings.xml'),'-f',str(STAGE/name/'pom.xml')]
         # Exchange publication is a separate lifecycle from CloudHub deployment.
         subprocess.run(mvn+['clean','deploy','-DskipMunitTests'],env=runenv,check=True)
         jar=list((STAGE/name/'target').glob('*-mule-application.jar'))
