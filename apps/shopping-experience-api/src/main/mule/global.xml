@@ -2,10 +2,10 @@
 <mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
 <configuration-properties file="config.properties"/>
 <http:listener-config name="listener"><http:listener-connection host="${http.host}" port="${http.port}"/></http:listener-config>
-<http:request-config name="backend" responseTimeout="5000"><http:request-connection host="${backend.host}" port="${backend.port}"/></http:request-config>
-<http:request-config name="inventory" responseTimeout="5000"><http:request-connection host="${inventory.host}" port="${inventory.port}"/></http:request-config>
-<http:request-config name="orders" responseTimeout="5000"><http:request-connection host="${orders.host}" port="${orders.port}"/></http:request-config>
-<http:request-config name="process" responseTimeout="5000"><http:request-connection host="${process.host}" port="${process.port}"/></http:request-config>
+<http:request-config name="backend" responseTimeout="5000"><http:request-connection protocol="${backend.protocol}" host="${backend.host}" port="${backend.port}"/></http:request-config>
+<http:request-config name="inventory" responseTimeout="5000"><http:request-connection protocol="${inventory.protocol}" host="${inventory.host}" port="${inventory.port}"/></http:request-config>
+<http:request-config name="orders" responseTimeout="5000"><http:request-connection protocol="${orders.protocol}" host="${orders.host}" port="${orders.port}"/></http:request-config>
+<http:request-config name="process" responseTimeout="5000"><http:request-connection protocol="${process.protocol}" host="${process.host}" port="${process.port}"/></http:request-config>
 <flow name="health"><http:listener config-ref="listener" path="/health" allowedMethods="GET">
 <http:response statusCode="#[vars.status default 200]"><http:headers>#[{"x-correlation-id": vars.traceId default correlationId}]</http:headers></http:response>
 <http:error-response statusCode="#[vars.status default 500]"><http:body>#[payload]</http:body></http:error-response></http:listener>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+    <configuration-properties file="config.properties"/>
+    <http:listener-config name="listener"><http:listener-connection host="${http.host}" port="${http.port}"/></http:listener-config>
+    <flow name="mock-backend">
+        <http:listener config-ref="listener" path="/*" allowedMethods="GET,POST,DELETE">
+            <http:response statusCode="#[vars.status default 200]"/>
+            <http:error-response statusCode="400"><http:body>#[output application/json --- {error: "BAD_REQUEST"}]</http:body></http:error-response>
+        </http:listener>
+        <ee:transform><ee:message><ee:set-payload><![CDATA[%dw 2.0
+output application/java
+---
+java!com::showtell::MockBackend::dispatch(attributes.method, attributes.requestPath, attributes.queryParams, if (attributes.method == "POST") payload else {})
+]]></ee:set-payload></ee:message></ee:transform>
+        <set-variable variableName="status" value="#[payload.status]"/>
+        <set-payload value="#[output application/json --- payload.body]"/>
+    </flow>
+</mule>

@@ -1,37 +1,46 @@
-# GitHub delivery setup
+# GitHub delivery
 
-The prepared workflow `.github/workflows/mule-ci.yml` checks out the requested revision, selects Java 17, runs MUnit, and packages all four apps on an Ubuntu runner. The resulting artifact contains the exact source commit, four deployable JARs and SHA-256 checksums. Packages and test reports expire after one day. New runs cancel obsolete builds on the same branch.
+Repository: https://github.com/pkiragu/mulesoft-troubleshooting-demo (private).
 
-**Status (17 September 2026):** CI workflow prepared locally; no hosted workflow has run and deployment is not enabled yet. The private repository https://github.com/pkiragu/mulesoft-troubleshooting-demo was created through Chrome. Target: CloudHub 2.0, Shared Space US East (Ohio), Sandbox. The trial has 1 Sandbox vCore available and expires on 17 October 2026. The Connected App form is prepared but not saved, pending confirmation of its new access grant. A clean hosted build must also verify that all Mule/MUnit dependencies are available outside this machine's Maven cache; repository credentials might be needed if any required enterprise artifacts are restricted.
+Target: Show and Tell Demo / Sandbox / CloudHub 2.0 US East (Ohio). The trial showed 1 Sandbox vCore available on 17 September 2026 and expires on 17 October 2026. Five single replicas at 0.1 vCore each request 0.5 vCore in total. No paid upgrade is configured.
 
-## Cost
+## Workflows
 
-GitHub Free includes 2,000 hosted-runner minutes/month and 500 MB artifact storage for private repositories. Standard hosted runners are free for public repositories; self-hosted runners are also free under the current GitHub billing documentation. Account-wide consumption and storage still need to remain within the chosen plan's allowances. Use a private repo for this demonstration unless you intentionally want to publish its source and logs. Artifact retention is one day to reduce storage use.
+- **Mule - package** runs on main pushes, pull requests and manual dispatch. It packages the four API apps on Java 17 and saves JARs, source commit and checksums for one day.
+- **Mule - deploy CloudHub trial** is manually dispatched on main. Select `incident` for the broken demo or `fixed` after the repair. It checks mock backend contracts, packages all five apps, then publishes and deploys backend → inventory system → order system → order process → shopping experience. It discovers the actual CloudHub URLs and uses HTTPS for downstream calls. Health checks and London/Bristol checkout status checks must pass.
+
+Deployment uses unique Exchange versions derived from run number and attempt. Each app is packaged and published in the same Maven deployment invocation. Deployed JARs and URLs are saved in the run artifact; the successful run summary links the services. Concurrent deployments are serialized. Deployment can partially complete: inspect failed runs before retrying. A full redeployment resets the cloud mock's data.
+
+## Tests and trial limitation
+
+The first hosted MUnit run failed because `com.mulesoft.mule.distributions:mule-runtime-impl-no-services-bom:4.9.0` is not available from the public Maven repository. The local Studio installation has these Enterprise dependencies. Hosted workflows therefore explicitly use `-DskipMunitTests`; they do not claim MUnit success. Run MUnit locally before pushing:
+
+```sh
+JAVA_HOME=/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home mvn -B -Pcloud verify
+```
+
+GitHub runs standalone backend contract checks and live CloudHub smoke checks. An Enterprise Maven entitlement (or a deliberately configured self-hosted runner) would be needed to move the existing MUnit gate into CI. Original MUnit tests intentionally miss the string quantity defect; the presenter patch adds its regression test.
+
+## Credentials
+
+The approved `github-demo-deployer` Connected App has Design Center Developer and Exchange Creator in Show and Tell Demo, and Create Applications, Manage Settings and Read Applications restricted to Sandbox. `ANYPOINT_CLIENT_ID` and `ANYPOINT_CLIENT_SECRET` are saved as GitHub repository Actions secrets. No credential value is committed. The deployment script writes only environment-variable references to Maven settings. GitHub CLI was authorized as pkiragu through Chrome for source publishing.
+
+## Cloud mock backend
+
+`cloud/mock-backend` is an additional Mule app with a bounded, in-memory Java warehouse. It preserves the London numeric / Bristol string distinction, atomic reservations, idempotent order creation and retrieval. It holds at most 20,000 reservations, uses one replica, and resets on restart. It is synthetic demonstration data only, with no authentication or production durability. The original local SQLite backend is unchanged.
+
+Build it with `mvn -Pcloud package`. The ordinary local demo scripts continue to run the four APIs and Python backend. API defaults remain loopback HTTP; CloudHub overrides listener address/port and downstream HTTPS hosts. `scripts/cloud_deploy.py --prepare 1.0.NUMBER` creates isolated standalone Exchange POMs under ignored `.run/cloud-build`, preserving the original project's coordinates and incident line.
+
+## Free allowance
+
+GitHub Free includes 2,000 hosted-runner minutes/month and 500 MB artifact storage for private repositories. Account-wide usage must stay within its allowance; this is separate from the time-limited MuleSoft trial. Artifacts expire after one day. Repeated full deployments consume more minutes than packaging; use manual dispatch for the demo.
 
 Sources:
 - https://docs.github.com/en/billing/concepts/product-billing/github-actions
 - https://docs.mulesoft.com/mule-runtime/latest/deploy-to-cloudhub-2
+- https://docs.mulesoft.com/exchange/to-publish-assets-maven
+- https://docs.mulesoft.com/cloudhub-2/ch2-api-reference
 
-## Deployment choices
+## Verification status
 
-### Existing local demo runtime
-
-A self-hosted runner on the Mac can retrieve the tested package and deploy to the existing runtime. It needs access to the runtime directory and local backend. Restrict that job to manually dispatched, trusted repository revisions; never run pull-request code on the Mac runner. Runner registration gives repository workflows code execution on this computer and must be configured deliberately.
-
-The current startup/deployment script is workspace-relative. A delivery job should use a fixed runtime path instead of assuming the runner checkout is this workspace, deploy the downloaded JARs in system/process/experience order, wait for deployment markers, and run an explicit incident-or-fixed smoke check. Do not rebuild different binaries in the deployment job.
-
-### Anypoint trial / CloudHub
-
-Use the Mule Maven plugin with an Anypoint Connected App, credentials stored as GitHub environment secrets, and an explicit target environment. Trial runtime entitlements and expiry are separate from GitHub Actions. Check whether this trial supports CloudHub or CloudHub 2.0 and how much application capacity it includes before creating deployments.
-
-These apps currently bind to 127.0.0.1, use individual local ports, and call a Python/SQLite backend at localhost:8095. A cloud release needs cloud listener configuration, reachable downstream API URLs, and a cloud-accessible mock backend (or a Mule-native replacement). The current local JAR configuration cannot simply be uploaded unchanged and expected to work across four cloud workers.
-
-Remaining setup: cloud-compatible backend and service connections, source upload, connected-app credentials in GitHub Actions secrets, deployment workflow, and an actual hosted build/deployment verification. Chrome is signed in as pkiragu; the local GitHub CLI is signed in as jengotrack, so it must not be assumed to have access to this private repository.
-
-Prepared Connected App: `github-demo-deployer`, client credentials, Design Center Developer and Exchange Creator in Show and Tell Demo; Create Applications, Manage Settings and Read Applications restricted to Sandbox. Its form remains unsaved pending user confirmation. No credentials have been created or copied.
-
-## Live demonstration sequence
-
-Investigate logs → identify defect → propose a fix → add a failing regression test → fix → commit → GitHub runs tests → deploy the tested package → verify both stores succeed.
-
-The original test suite intentionally misses the string-quantity case. It will pass on the incident version; the newly added regression test is what improves the deployment gate.
+Local backend packaging and real Mule HTTP checks passed, including data types, reservations, order retrieval, idempotency and stock rejection. GitHub publication and cloud deployment must be verified from the actual workflow run; the existence of these files alone is not evidence of deployment.

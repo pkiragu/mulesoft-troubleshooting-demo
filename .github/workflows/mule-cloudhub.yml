@@ -1,0 +1,54 @@
+name: Mule - deploy CloudHub trial
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Expected demo behaviour after deployment
+        type: choice
+        options: [incident, fixed]
+        default: incident
+permissions:
+  contents: read
+concurrency:
+  group: cloudhub-trial
+  cancel-in-progress: false
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+      - name: Check mock backend state and contracts
+        run: |
+          mkdir -p .run/backend-check
+          javac -d .run/backend-check cloud/mock-backend/src/main/java/com/showtell/MockBackend.java cloud/mock-backend/src/test/java/com/showtell/MockBackendCheck.java
+          java -ea -cp .run/backend-check com.showtell.MockBackendCheck
+      - name: Package all APIs and cloud backend (MUnit runs locally)
+        run: mvn -B -ntp -Pcloud clean package -DskipMunitTests
+      - name: Prepare unique Exchange release
+        env:
+          RUN_NUMBER: ${{ github.run_number }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+        run: python3 scripts/cloud_deploy.py --prepare "1.0.$((RUN_NUMBER * 100 + RUN_ATTEMPT))"
+      - name: Deploy backend, system, process and experience APIs and smoke test
+        env:
+          DEMO_MODE: ${{ inputs.mode }}
+          ANYPOINT_CLIENT_ID: ${{ secrets.ANYPOINT_CLIENT_ID }}
+          ANYPOINT_CLIENT_SECRET: ${{ secrets.ANYPOINT_CLIENT_SECRET }}
+        run: python3 scripts/cloud_deploy.py --deploy
+      - name: Save deployment packages and URLs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: cloudhub-delivery-${{ github.sha }}
+          path: delivery/cloud/
+          if-no-files-found: ignore
+          retention-days: 1

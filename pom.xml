@@ -4,4 +4,5 @@
 <properties><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding><mule.maven.plugin.version>4.3.0</mule.maven.plugin.version><app.runtime>4.9.0</app.runtime><munit.version>3.4.0</munit.version></properties>
 <repositories><repository><id>mulesoft-releases</id><url>https://repository.mulesoft.org/releases/</url></repository></repositories>
 <pluginRepositories><pluginRepository><id>mulesoft-releases</id><url>https://repository.mulesoft.org/releases/</url></pluginRepository></pluginRepositories>
+<profiles><profile><id>cloud</id><modules><module>cloud/mock-backend</module></modules></profile></profiles>
 </project>
