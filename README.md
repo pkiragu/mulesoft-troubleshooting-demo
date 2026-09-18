@@ -1,6 +1,6 @@
 # Click & Collect: MuleSoft troubleshooting demo
 
-Four real Mule 4 applications, a fictional warehouse/order backend, and repeatable HTTP traffic. This is a local training environment. All business data and traffic are synthetic.
+Four real Mule 4 applications, a fictional warehouse/order backend, and repeatable HTTP traffic. The demo runs locally and in a CloudHub 2.0 trial environment. All business data and traffic are synthetic.
 
 | Layer | Application | Local port | Responsibility |
 |---|---|---:|---|
@@ -10,7 +10,7 @@ Four real Mule 4 applications, a fictional warehouse/order backend, and repeatab
 | Experience | shopping-experience-api | 8084 | Customer checkout and response shaping |
 | Mock backend | scripts/backend.py | 8095 | SQLite warehouse, reservations and orders |
 
-Each Mule application has XML flows, configuration, a Maven POM, and an artifact descriptor. DataWeave mappings live in `src/main/resources/dw`. RAML contracts are in `contracts/`. All listeners bind to loopback. Dependencies are configured in each app's `config.properties`.
+Each Mule application has XML flows, configuration, a Maven POM, and an artifact descriptor. DataWeave mappings live in `src/main/resources/dw`. RAML contracts are in `contracts/`. Local listeners bind to loopback; the CloudHub deployment overrides listener and downstream connection settings. Dependencies are configured in each app's `config.properties`.
 
 ## Run locally
 
