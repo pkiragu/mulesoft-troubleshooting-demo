@@ -59,3 +59,13 @@ The deploy command waits for a new deployment marker and a healthy listener befo
 This is a troubleshooting teaching environment, not a production checkout implementation. RAML documents the API contracts; these apps use explicit HTTP flows rather than APIkit routing. Request validation is deliberately small. There is no authentication, payment, distributed transaction recovery, reservation expiry, or checkout idempotency. Inventory reservations are atomic in the mock backend, and order creation is idempotent by reservation ID. A failure after reservation can leave a reservation pending. Those behaviours are outside this incident's scope.
 
 Import the four `apps/` directories as existing Mule projects in Anypoint Studio, or run all four with the isolated local runtime. For GitHub delivery and CloudHub configuration, see [GitHub delivery](docs/github-delivery.md). The cloud mock is a separate, ephemeral Mule application; local SQLite data is retained independently.
+
+## Redact logs before sharing
+
+Use the offline [log-redaction script and review workflow](docs/log-redaction.md) to create a separate sanitized file:
+
+```sh
+python3 scripts/redact_logs.py evidence/runtime/mule-console.log --output .run/sanitized/mule-console.redacted.log
+```
+
+The default keeps approved structured diagnostic fields and omits unstructured lines. Review the output before sharing; automatic redaction cannot guarantee that all personal data has been removed.
